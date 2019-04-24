@@ -20,5 +20,5 @@ dropuser $SYSTEM_USER_OPTS --if-exists $USER
 
 createuser $SYSTEM_USER_OPTS $USER
 for e in $ENVS; do
-    createdb $SYSTEM_USER_OPTS ${DB}_$e -O $USER
+    createdb $SYSTEM_USER_OPTS -O $USER ${DB}_$e
 done
