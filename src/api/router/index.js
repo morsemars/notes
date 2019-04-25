@@ -50,6 +50,17 @@ function setupRoutesWithRequiredAuthentication(router) {
         '/notes/:noteId',
         route.note.delete
     );
+
+    //Version
+    router.get(
+        '/notes/:noteId/versions',
+        route.version.list
+    );
+    router.get(
+        '/notes/:noteId/versions/:versionId',
+        apiMiddleware.jsonParser,
+        route.version.get
+    );
 }
 
 function setup(router) {

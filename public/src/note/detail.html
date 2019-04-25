@@ -5,16 +5,27 @@
     <li class="active" ng-bind="$ctrl.note.subject"></li>
 </ol>
 
-<p class="clearfix">
-    <a class="btn btn-default pull-right" ng-href="#!/notes/{{ $ctrl.note.id }}/edit">Edit</a>
-</p>
+
+<div class="form-group row align-items-center">
+    <div class="col-md-9"></div>
+    <label for="version" class="col-sm-1 col-form-label" style="line-height: 34px; text-align: right; padding: 0;">Version</label>
+    <div class="col-sm-1 offset-md-3">
+        <select class="form-control form-control-lg" ng-model="$ctrl.display">
+            <option ng-value="$ctrl.note" ng-bind="$ctrl.note.version"></option>
+            <option ng-repeat="version in $ctrl.versions" ng-value="version" ng-bind="version.version"></option>
+        </select>
+    </div>
+    <div class="col-sm-1">
+        <a class="btn btn-default" ng-href="#!/notes/{{ $ctrl.note.id }}/edit">Edit</a>
+    </div>
+</div>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title" ng-bind="$ctrl.note.subject"></h3>
     </div>
 
-    <div class="panel-body" style="white-space: pre-wrap;" ng-bind="$ctrl.note.body"></div>
+    <div class="panel-body" style="white-space: pre-wrap;" ng-bind="$ctrl.display.body"></div>
 
     <div class="panel-footer" ng-bind="$ctrl.note.updatedAt | date:'medium'"></div>
 </div>

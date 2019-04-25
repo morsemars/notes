@@ -33,24 +33,25 @@ describe('Tests for domain Note', () => {
         });
 
         describe('expose', () => {
-            it('should expose the id, subject, body and updatedAt of the note', () => {
+            it('should expose the id, subject, version, body and updatedAt of the note', () => {
                 domainNote.expose().should.match({
                     id: noteId,
                     subject: 'some subject',
                     body: 'some body',
+                    version: 1,
                     updatedAt: _.isDate,
                 });
             });
         });
 
         describe('update', () => {
-            it('should update the body of the note', async () => {
+            it('should update the body and version of the note', async () => {
                 await domainNote.update('new body');
-
                 domainNote.expose().should.match({
                     id: noteId,
                     subject: 'some subject',
                     body: 'new body',
+                    version: 2,
                     updatedAt: _.isDate,
                 });
             });
@@ -60,6 +61,15 @@ describe('Tests for domain Note', () => {
                     subject: 'new subject',
                     body: 'updated body'
                 }).should.be.rejectedWith(model.sequelize.ValidationError);
+            });
+
+        });
+
+        describe('versions', () => {
+            it('should retrieve all the versions of the note', async () => {
+                await domainNote.update('new body');
+                const versions = await domainNote.versions();
+                versions.length.should.be.equal(1);
             });
         });
 
