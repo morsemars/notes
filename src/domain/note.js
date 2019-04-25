@@ -27,7 +27,7 @@ class Note {
     }
 
     async update(body) {
-        await this.createVersion(this._note.subject, body, this._note.version);
+        await this.createVersion(this._note.subject, this._note.body, this._note.version);
         await this._note.update({
             body,
             version: this._note.version + 1
