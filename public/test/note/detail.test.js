@@ -35,7 +35,6 @@ describe('noteDetail', function() {
 
     describe('$onInit', () => {
         it('should set display to notes', () => {
-            console.log(ctrl);
             ctrl.$onInit();
 
             expect(ctrl.display).toEqual(note);
