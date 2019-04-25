@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 
 module.exports.define = sequelize => {
-    return sequelize.define('Note', {
+    return sequelize.define('Version', {
         id: {
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -26,15 +26,14 @@ module.exports.define = sequelize => {
         },
         version: {
             type: Sequelize.INTEGER,
-            allowNull: false,
-            defaultValue: 1
+            allowNull: false
         }
     }, {
         indexes: [
             {
-                name: 'Notes_user_id',
+                name: 'Notes_version_id',
                 unique: true,
-                fields: ['userId', 'id']
+                fields: ['noteId', 'id']
             },
         ],
     });

@@ -8,14 +8,18 @@ const sequelize = new Sequelize(config.postgresql.url, {
 
 const User = require('./user');
 const Note = require('./note');
+const Version = require('./version');
 const userNoteAssociation = require('./userNote');
+const noteVersionAssociation = require('./noteVersion');
 
 const models = {
     sequelize,
     User: User.define(sequelize),
     Note: Note.define(sequelize),
+    Version: Version.define(sequelize),
 };
 
 userNoteAssociation.define(models);
+noteVersionAssociation.define(models);
 
 module.exports = models;
