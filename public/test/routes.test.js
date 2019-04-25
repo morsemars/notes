@@ -8,22 +8,25 @@ describe('routes', function() {
     let Session;
     let Note;
     let path;
+    let Version;
 
     beforeEach(() => {
         module('app');
 
-        inject((_$q_, _$rootScope_, _$route_, _$location_, _Session_, _Note_) => {
+        inject((_$q_, _$rootScope_, _$route_, _$location_, _Session_, _Note_, _Version_) => {
             $q = _$q_;
             $rootScope = _$rootScope_;
             $route = _$route_;
             $location = _$location_;
             Session = _Session_;
             Note = _Note_;
+            Version = _Version_;
         });
 
         spyOn(Session, 'current');
         spyOn(Note, 'query');
         spyOn(Note, 'get');
+        spyOn(Version, 'query');
     });
 
     function resolveCurrentSession(done) {
@@ -98,6 +101,23 @@ describe('routes', function() {
             expect(Note.get).toHaveBeenCalledWith({
                 id: ':noteId'
             });
+
+            done();
+        }).catch(reason => {
+            fail(`Should not reject: ${ reason }`);
+            done();
+        });
+
+        $rootScope.$digest();
+    }
+
+    function resolveVersions(done) {
+        Version.query.and.returnValue({
+            $promise: $q.when('versions'),
+        });
+
+        $route.current.resolve.versions(Version, $route).then(versions => {
+            expect(versions).toEqual('versions');
 
             done();
         }).catch(reason => {
@@ -209,6 +229,14 @@ describe('routes', function() {
             $rootScope.$digest();
 
             resolveNote(done);
+        });
+
+        it('should resolve version', done => {
+            $location.path(path);
+
+            $rootScope.$digest();
+
+            resolveVersions(done);
         });
     });
 

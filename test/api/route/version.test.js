@@ -22,10 +22,10 @@ describe('Tests for api route note', () => {
         };
 
         note = {
-            expose: sinon.stub().returns('exposedNote'),
+            /* expose: sinon.stub().returns('exposedNote'),
             update: sinon.stub().resolves(),
             delete: sinon.stub().resolves(),
-            createVersion: sinon.stub().resolves(version),
+            createVersion: sinon.stub().resolves(version), */
             versions: sinon.stub().resolves([
                 version,
                 version
@@ -48,7 +48,7 @@ describe('Tests for api route note', () => {
         });
     });
 
-    describe('get', () => {
+    /* describe('get', () => {
         it('should json the exposed version', () => {
             req.version = version;
 
@@ -56,6 +56,6 @@ describe('Tests for api route note', () => {
 
             res.json.calledWithExactly('exposedVersion').should.be.true();
         });
-    });
+    }); */
 
 });
