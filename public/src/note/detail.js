@@ -5,5 +5,11 @@ angular.module('app').component('noteDetail', {
     bindings: {
         session: '<',
         note: '<',
+        versions: '<'
+    },
+    controller: function(Version) {
+        this.$onInit = function() {
+            this.display = this.note;
+        };
     },
 });

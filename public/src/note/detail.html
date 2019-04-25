@@ -6,6 +6,10 @@
 </ol>
 
 <p class="clearfix">
+    <select class="form-control form-control-lg" ng-model="$ctrl.display" onchange="">
+        <option ng-value="$ctrl.note" ng-bind="$ctrl.note.version"></option>
+        <option ng-repeat="version in $ctrl.versions" ng-value="version" ng-bind="version.version"></option>
+    </select>
     <a class="btn btn-default pull-right" ng-href="#!/notes/{{ $ctrl.note.id }}/edit">Edit</a>
 </p>
 
@@ -14,7 +18,7 @@
         <h3 class="panel-title" ng-bind="$ctrl.note.subject"></h3>
     </div>
 
-    <div class="panel-body" style="white-space: pre-wrap;" ng-bind="$ctrl.note.body"></div>
+    <div class="panel-body" style="white-space: pre-wrap;" ng-bind="$ctrl.display.body"></div>
 
     <div class="panel-footer" ng-bind="$ctrl.note.updatedAt | date:'medium'"></div>
 </div>
