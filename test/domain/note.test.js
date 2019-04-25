@@ -54,6 +54,13 @@ describe('Tests for domain Note', () => {
                     updatedAt: _.isDate,
                 });
             });
+
+            it('should not update the subject of the note', async () => {
+                await domainNote.update({
+                    subject: 'new subject',
+                    body: 'updated body'
+                }).should.be.rejectedWith(model.sequelize.ValidationError);
+            });
         });
 
         describe('delete', () => {

@@ -49,11 +49,12 @@ describe('noteEdit', function() {
     });
 
     describe('updateNote', () => {
-        it('should update the Note then redirect to note detail page if success', () => {
+        it('should update the body of Note only then redirect to note detail page if success', () => {
             Note.update.and.returnValue({
                 $promise: $q.when(),
             });
 
+            ctrl.note.subject = 'new subject';
             ctrl.note.body = 'new body';
 
             ctrl.updateNote();
@@ -63,7 +64,7 @@ describe('noteEdit', function() {
             expect(Note.update).toHaveBeenCalledWith({
                 id: 56,
             }, {
-                body: 'new body',
+                body: 'new body'
             });
 
             expect($location.path).toHaveBeenCalledWith('/notes/56');
