@@ -7,7 +7,7 @@ angular.module('app').component('noteDetail', {
         note: '<',
         versions: '<'
     },
-    controller: function(Version) {
+    controller: function() {
         this.$onInit = function() {
             this.display = this.note;
         };
